@@ -1,16 +1,16 @@
 # DeflectorNet
 
-## A Networking Library for From the Depths LUA Blocks
+## A Networking Library for From the Depths Lua Blocks
 
 Yes, I went there.
 
-Given strings, floats, or Vector3s, packs the values into floats and publishes the floats for other LUA blocks to read by setting them as the values of components. Currently supports hydrofoils, which are not optimal - they tend to get clobbered by built-in AI - but functional. I'd planned to use shield projectors and didn't want to change the name when I realized they didn't include the `[0, 1)` range that DF packs messages into.
+Given strings, floats, or Vector3s, packs the values into floats and publishes the floats for other Lua blocks to read by setting them as the values of components. Currently supports hydrofoils, which are not optimal - they tend to get clobbered by built-in AI - but functional. I'd planned to use shield projectors and didn't want to change the name when I realized they didn't include the `[0, 1)` range that DF packs messages into.
 
 ## How it Works
 
 Encodes a message as a header float, a sequence of floats containing information, and a footer float. The header float contains the type of the message (string, number, vector, channel-name-broadcast, signal) and the number of floats constituting the message (not including the header). The footer is just -1 and serves to reduce computational overhead.
 
-The system sends one float per tick. This implicitly relies on the LUA blocks executing in the same order ever frame, but so far this seems to be a reasonable assumption. This may fail after battle damage and reconstruction, but I think that, the way I've built this, this shoulnd't actually crash anything.
+The system sends one float per tick. This implicitly relies on the Lua blocks executing in the same order ever frame, but so far this seems to be a reasonable assumption. This may fail after battle damage and reconstruction, but I think that, the way I've built this, this shoulnd't actually crash anything.
 
 Once a non-footer value is seen, the system starts picking up floats. It reads the header, figures out how many values it expects to see, and waits until it has that many floats received before decoding them and putting them into a queue for being read out by the application.
 
