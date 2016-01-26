@@ -44,6 +44,10 @@ When you attempt to receive a message, one of keys in the table that it returns 
 
 DeflectorNet can handle an arbitrarily large number of channels per tick. Each channel can send one float per tick. A message is composed of two header/footer floats plus as many floats as the message requires. Three characters costs one float, a float costs one float, a vector costs three floats, and a signal costs zero floats.
 
+## Usage Guide and Documentation
+
+Functions and data types should be well-commented. There are two example programs included that serve to demonstrate a simple send-receive pair. I'll write more here later.
+
 ## Current Status
 
 Very experimental. It works. Sort of. Channel names aren't rebroadcasted at any period so development is tricky. However, it does work - I can send and receive strings. I'm very happy with the interface, so that probably won't change.
